@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"go-web/entity"
 	"html/template"
 	"log"
 	"net/http"
@@ -34,8 +35,22 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func HelloHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello world"))
+func ProductsHandler(w http.ResponseWriter, r *http.Request) {
+	data := entity.Product{Id: 1, Name: "Car", Price: 1200000000, Stock: 3}
+
+	tmpl, err := template.ParseFiles(path.Join("views", "index.html"), path.Join("views", "layout.html"))
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "Something went wrong", http.StatusInternalServerError)
+		return
+	}
+
+	err = tmpl.Execute(w, data)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "Something went wrong", http.StatusInternalServerError)
+		return
+	}
 }
 
 func ProductHandler(w http.ResponseWriter, r *http.Request) {

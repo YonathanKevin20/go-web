@@ -12,7 +12,7 @@ func main() {
 	port := "8080"
 
 	mux.HandleFunc("/", handler.HomeHandler)
-	mux.HandleFunc("/hello", handler.HelloHandler)
+	mux.HandleFunc("/products", handler.ProductsHandler)
 	mux.HandleFunc("/product", handler.ProductHandler)
 
 	log.Printf("Starting web on %v:%v", host, port)
