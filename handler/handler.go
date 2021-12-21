@@ -85,3 +85,16 @@ func ProductHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+func GetPost(w http.ResponseWriter, r *http.Request) {
+	method := r.Method
+
+	switch method {
+	case "GET":
+		w.Write([]byte("This is GET"))
+	case "POST":
+		w.Write([]byte("This is POST"))
+	default:
+		http.Error(w, "Unsupported method", http.StatusBadRequest)
+	}
+}
