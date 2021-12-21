@@ -1,9 +1,15 @@
 {{template "layout" .}}
 {{define "main"}}
-<div>
+{{range .}}
+<div style="margin-bottom: 10px;">
     Id: {{.Id}}<br>
     Name: {{.Name}}<br>
     Price: {{.Price}}<br>
-    Stock: {{.Stock}}
+    {{if eq .Stock 0}}
+      Out of stock
+    {{else}}
+      Stock: {{.Stock}}
+    {{end}}
 </div>
+{{end}}
 {{end}}

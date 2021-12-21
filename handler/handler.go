@@ -36,7 +36,12 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func ProductsHandler(w http.ResponseWriter, r *http.Request) {
-	data := entity.Product{Id: 1, Name: "Car", Price: 1200000000, Stock: 3}
+	data := []entity.Product{
+		{Id: 1, Name: "Car", Price: 1200000000, Stock: 3},
+		{Id: 2, Name: "Bike", Price: 5000000, Stock: 30},
+		{Id: 3, Name: "Plane", Price: 5430000000, Stock: 2},
+		{Id: 4, Name: "Yacht", Price: 670000000, Stock: 0},
+	}
 
 	tmpl, err := template.ParseFiles(path.Join("views", "index.html"), path.Join("views", "layout.html"))
 	if err != nil {
