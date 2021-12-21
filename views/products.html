@@ -1,0 +1,11 @@
+{{template "layout" .}}
+{{define "main"}}
+{{range .}}
+<div class="list-view">
+    Id: {{.Id}}<br>
+    Name: {{.Name}}<br>
+    Price: {{.Price}}<br>
+    {{.StockStatus}}
+</div>
+{{end}}
+{{end}}

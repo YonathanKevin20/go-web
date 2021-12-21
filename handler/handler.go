@@ -43,7 +43,7 @@ func ProductsHandler(w http.ResponseWriter, r *http.Request) {
 		{Id: 4, Name: "Yacht", Price: 670000000, Stock: 0},
 	}
 
-	tmpl, err := template.ParseFiles(path.Join("views", "index.html"), path.Join("views", "layout.html"))
+	tmpl, err := template.ParseFiles(path.Join("views", "products.html"), path.Join("views", "layout.html"))
 	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, "Something went wrong", http.StatusInternalServerError)

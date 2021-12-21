@@ -1,11 +1,5 @@
 {{template "layout" .}}
 {{define "main"}}
-{{range .}}
-<div style="margin-bottom: 10px;">
-    Id: {{.Id}}<br>
-    Name: {{.Name}}<br>
-    Price: {{.Price}}<br>
-    {{.StockStatus}}
-</div>
-{{end}}
+<h2>{{.title}}</h2>
+<p>{{.content}}</p>
 {{end}}

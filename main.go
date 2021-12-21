@@ -15,6 +15,9 @@ func main() {
 	mux.HandleFunc("/products", handler.ProductsHandler)
 	mux.HandleFunc("/product", handler.ProductHandler)
 
+	fileServer := http.FileServer(http.Dir("assets"))
+	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
+
 	log.Printf("Starting web on %v:%v", host, port)
 
 	err := http.ListenAndServe(host+":"+port, mux)
