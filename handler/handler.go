@@ -98,3 +98,62 @@ func GetPost(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Unsupported method", http.StatusBadRequest)
 	}
 }
+
+func Form(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		tmpl, err := template.ParseFiles(path.Join("views", "form.html"), path.Join("views", "layout.html"))
+		if err != nil {
+			log.Println(err.Error())
+			http.Error(w, "Something went wrong", http.StatusInternalServerError)
+			return
+		}
+
+		err = tmpl.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+			http.Error(w, "Something went wrong", http.StatusInternalServerError)
+			return
+		}
+
+		return
+	}
+
+	http.Error(w, "Unsupported method", http.StatusBadRequest)
+}
+
+func Process(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println(err.Error())
+			http.Error(w, "Something went wrong", http.StatusInternalServerError)
+			return
+		}
+
+		name := r.Form.Get("name")
+		message := r.Form.Get("message")
+
+		data := map[string]interface{}{
+			"name":    name,
+			"message": message,
+		}
+
+		tmpl, err := template.ParseFiles(path.Join("views", "result.html"), path.Join("views", "layout.html"))
+		if err != nil {
+			log.Println(err.Error())
+			http.Error(w, "Something went wrong", http.StatusInternalServerError)
+			return
+		}
+
+		err = tmpl.Execute(w, data)
+		if err != nil {
+			log.Println(err.Error())
+			http.Error(w, "Something went wrong", http.StatusInternalServerError)
+			return
+		}
+
+		return
+	}
+
+	http.Error(w, "Unsupported method", http.StatusBadRequest)
+}

@@ -1,0 +1,17 @@
+{{template "layout" .}}
+{{define "main"}}
+<div>
+  <form action="/process" method="post"><div class="list-view">
+    <label for="name">Name</label>
+      <input type="text" name="name" id="name" placeholder="Your Name" required>
+    </div>
+    <div class="list-view">
+      <label for="message">Message</label>
+      <textarea name="message" id="message" placeholder="Your Message" cols="30" rows="10" required></textarea>
+    </div>
+    <div class="list-view">
+      <input type="submit" value="Send">
+    </div>
+  </form>
+</div>
+{{end}}
